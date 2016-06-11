@@ -4,11 +4,11 @@ var mongooseUniqueValidator = require('mongoose-unique-validator');
 
 var schema = new Schema(
     {
-        firstName: {type: String, required: true},
-        lastName: {type: String, required: false},
-        password: {type: String, required: true},
-        email : {type: String, required:true, unique: true},
-        message : [{type: Schema.Types.ObjectId, ref: 'Message'}]
+            firstName: {type: String, required: true},
+            lastName: {type: String, required: false},
+            password: {type: String, required: true},
+            email : {type: String, required:true, unique: true},
+            message : [{type: Schema.Types.ObjectId, ref: 'Message'}]
     }
 );
 

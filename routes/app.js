@@ -6,6 +6,18 @@ router.get('/:sameTitle?', function (req, res, next) {
     res.render('node', {title: req.params.sameTitle ? req.params.sameTitle : 'Default title'});
 });
 
+
+router.get('/user/email', function (req, res, next) {
+    User.findOne({}, function (err, doc) {
+        if (err) {
+            return res.send('Error');
+        }
+        var email = doc ? doc.email : '';
+        res.render('node', {email: email});
+    });
+
+});
+
 router.post('/', function (req, res, next) {
     var email = req.body.email;
     var user = new User({
