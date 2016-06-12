@@ -2,18 +2,16 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
 
-router.get('/:sameTitle?', function (req, res, next) {
-    res.render('node', {title: req.params.sameTitle ? req.params.sameTitle : 'Default title'});
-});
-
-
-router.get('/user/email', function (req, res, next) {
+router.get('/', function (req, res, next) {
+    var email = '';
     User.findOne({}, function (err, doc) {
         if (err) {
             return res.send('Error');
         }
-        var email = doc ? doc.email : '';
-        res.render('node', {email: email});
+        if (doc) {
+            email = doc.email;
+        }
+        res.render('index', {email: email});
     });
 
 });
@@ -21,12 +19,13 @@ router.get('/user/email', function (req, res, next) {
 router.post('/', function (req, res, next) {
     var email = req.body.email;
     var user = new User({
-        firstName: 'Imax',
-        lastName: 'BoBy',
-        password: 'same-password',
+        firstName: 'Max',
+        lastName: 'Schwarz',
+        password: 'super-secret',
         email: email
     });
     user.save();
     res.redirect('/');
 });
+
 module.exports = router;
